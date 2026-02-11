@@ -9,13 +9,6 @@ This machine learning project predicts the price range of a mobile phone based o
 The goal is to predict the price category (range) of a mobile device given its features such as RAM, battery power, screen size, etc. The target variable `price_range` is a multi-class label with four categories (0 to 3).
 
 
-##  Demo Video
-
-Click to watch a short demo of the working project interface:
-
-[Watch Demo 1](https://drive.google.com/file/d/19Y4xytJNVtI2acNoo1MOrT3UkeAhn4Nd/view?usp=sharing)
-[Watch Demo 2](https://drive.google.com/file/d/1mvo7wYxkg2ZRTvqGEh5_hpM7eNhZt28B/view?usp=sharing)
-> 💡 _Not deployed online — this video demonstrates how the app works locally._
 
 
 ##  Screenshots
@@ -23,26 +16,26 @@ Click to watch a short demo of the working project interface:
 > Below are screenshots of the deployed model:
 
 - **Input Form** (HTML UI with feature fields)<br><br>
-  ![front-end](scrrenshots/front_end1.png)
+  ![front-end](front_end1.png)
   
-  ![front-end](scrrenshots/front_end2.png)<br><br><br>
+  ![front-end](front_end2.png)<br><br><br>
 
   
 - **Prediction Output** (Displayed after form submission)<br><br>
-  ![first_input](scrrenshots/input1.png)<br>
-  ![first_input](scrrenshots/output1.png)
+  ![first_input](input1.png)<br>
+  ![first_input](output1.png)
 ---
   <br><br>
-  ![first_input](scrrenshots/input2.png)<br>
-  ![first_input](scrrenshots/output2.png)
+  ![first_input](input2.png)<br>
+  ![first_input](output2.png)
 ---
   <br><br>
-    ![first_input](scrrenshots/input3.png)<br>
-  ![first_input](scrrenshots/output3.png)
+    ![first_input](input3.png)<br>
+  ![first_input](output3.png)
 ---
   <br><br><br>
 - **Confusion Matrix** (From evaluation notebook)<br>
-  ![first_input](scrrenshots/confusion_matrix.png)<br>
+  ![first_input](confusion_matrix.png)<br>
 
 
 
