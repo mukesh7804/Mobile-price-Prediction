@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mobile Price Prediction</title>
+    <!--Bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background-color: #f9f9f9;
+      }
+      ul > li {
+        list-style: none;
+      }
+      h2,
+      h3 {
+        color: #333;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+      input,
+      select {
+        width: 220px;
+        padding: 5px;
+        margin-bottom: 15px;
+      }
+      .form-section {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      }
+      .legend {
+        margin-bottom: 20px;
+        padding: 15px;
+        background: #eef;
+        border-left: 5px solid #88f;
+      }
+      .btn-dark {
+        background-color: #88f !important;
+        border-color: #88f;
+      }
+      .btn:hover {
+        background-color: rgba(136, 136, 255, 0.422) !important;
+        border-color: rgba(136, 136, 255, 0.422) !important;
+        color: black;
+      }
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .btn {
+        width: 50% !important;
+      }
+      .heading {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 class="heading">Mobile Price Range Prediction</h2>
+
+    <div class="legend">
+      <h3>Price Category Legend:</h3>
+      <ul>
+        <li><strong>0</strong> → Low Cost</li>
+        <li><strong>1</strong> → Medium Cost</li>
+        <li><strong>2</strong> → High Cost</li>
+        <li><strong>3</strong> → Very High Cost</li>
+      </ul>
+    </div>
+
+    {% if prediction_text is not none %}
+    <h3 style="margin-top: 30px">Predicted Price Category:</h3>
+
+    {% set label_map = { 0: "Low Cost ", 1: "Medium Cost ", 2: "High Cost ", 3:
+    "Very High Cost " } %}
+
+    <p style="font-size: 1.3em; color: green; margin: 1rem">
+      {{ prediction_text }} →
+      <strong>{{ label_map[prediction_text|int] }}</strong>
+    </p>
+    {% endif %}
+
+    <div class="form-section">
+      <form action="/predict" method="post">
+        <div class="row">
+          <!--first-->
+          <div class="col-4">
+            <label>Battery Power (mAh):</label>
+            <input
+              type="number"
+              name="battery_power"
+              required
+              min="500"
+              max="2000"
+            />
+          </div>
+
+          <!--second-->
+          <div class="col-4">
+            <label>Bluetooth:</label>
+            <select name="blue" required>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+
+          <!--third-->
+          <div class="col-4">
+            <label>Clock Speed (GHz):</label>
+            <input
+              type="number"
+              step="0.1"
+              name="clock_speed"
+              required
+              min="0.5"
+              max="3.0"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <!--fourth-->
+          <div class="col-4">
+            <label>Dual SIM:</label>
+            <select name="dual_sim" required>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+
+          <!--five-->
+          <div class="col-4">
+            <label>4G Support:</label>
+            <select name="four_g" required>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+
+          <!--6-->
+          <div class="col-4">
+            <label>3G Support:</label>
+            <select name="three_g" required>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <!--7-->
+          <div class="col-4">
+            <label>Front Camera (MP):</label>
+            <input type="number" name="fc" required min="0" max="20" />
+          </div>
+
+          <!--8-->
+          <div class="col-4">
+            <label>Internal Memory (GB):</label>
+            <input type="number" name="int_memory" required min="2" max="64" />
+          </div>
+
+          <!--9-->
+          <div class="col-4">
+            <label>Mobile Depth (cm):</label>
+            <input
+              type="number"
+              step="0.1"
+              name="m_dep"
+              required
+              min="0.1"
+              max="1.0"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <!--10-->
+          <div class="col-4">
+            <label>Mobile Weight (grams):</label>
+            <input type="number" name="mobile_wt" required min="80" max="200" />
+          </div>
+
+          <!--11-->
+          <div class="col-4">
+            <label>Processor Cores:</label>
+            <input type="number" name="n_cores" required min="1" max="8" />
+          </div>
+
+          <!--12-->
+          <div class="col-4">
+            <label>Primary Camera (MP):</label>
+            <input type="number" name="pc" required min="0" max="20" />
+          </div>
+        </div>
+
+        <div class="row">
+          <!--13-->
+          <div class="col-4">
+            <label>Pixel Height (px):</label>
+            <input type="number" name="px_height" required min="0" max="1960" />
+          </div>
+
+          <!--14-->
+          <div class="col-4">
+            <label>Pixel Width (px):</label>
+            <input
+              type="number"
+              name="px_width"
+              required
+              min="500"
+              max="2000"
+            />
+          </div>
+
+          <!--15-->
+          <div class="col-4">
+            <label>RAM (MB):</label>
+            <input type="number" name="ram" required min="256" max="4000" />
+          </div>
+        </div>
+
+        <div class="row">
+          <!--16-->
+          <div class="col-4">
+            <label>Screen Height (cm):</label>
+            <input type="number" name="sc_h" required min="5" max="20" />
+          </div>
+
+          <!--17-->
+          <div class="col-4">
+            <label>Screen Width (cm):</label>
+            <input type="number" name="sc_w" required min="0" max="18" />
+          </div>
+
+          <!--18-->
+          <div class="col-4">
+            <label>Talk Time (hours):</label>
+            <input type="number" name="talk_time" required min="2" max="20" />
+          </div>
+        </div>
+
+        <div class="row">
+          <!--19-->
+          <div class="col-4">
+            <label>Touch Screen:</label>
+            <select name="touch_screen" required>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+
+          <!--20-->
+          <div class="col-4">
+            <label>WiFi:</label>
+            <select name="wifi" required>
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+          <!--21-->
+          <div class="col-4"></div>
+        </div>
+
+        <br />
+        <div class="btn-container">
+          <input
+            class="btn btn-dark"
+            type="submit"
+            value="Predict Price Range"
+          />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
